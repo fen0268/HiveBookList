@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_book_list_sample/presentation/book_list/book_list_model.dart';
 import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:provider/provider.dart';
@@ -27,15 +28,27 @@ class BookListPage extends StatelessWidget {
                       itemCount: model.books.length,
                       itemBuilder: (context, index) {
                         final book = model.books[index];
-                        return ListTile(
-                          title: Text(book.title),
-                          subtitle: Text(book.author),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () async {
-                              model.delete(book: book);
-                              model.fetchBooks();
-                            },
+                        return Slidable(
+                          endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                const SlidableAction(
+                                  onPressed: null,
+                                  icon: Icons.edit,
+                                  label: '編集',
+                                ),
+                                SlidableAction(
+                                  onPressed: (BuildContext context) {
+                                    model.delete(book: book);
+                                    model.fetchBooks();
+                                  },
+                                  icon: Icons.delete,
+                                  label: '削除',
+                                ),
+                              ]),
+                          child: ListTile(
+                            title: Text(book.title),
+                            subtitle: Text(book.author),
                           ),
                         );
                       }),
