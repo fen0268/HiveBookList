@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_book_list_sample/presentation/book_list/book_list_model.dart';
+import 'package:hive_book_list_sample/presentation/edit_book/edit_book_page.dart';
 import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:provider/provider.dart';
 
@@ -32,8 +33,18 @@ class BookListPage extends StatelessWidget {
                           endActionPane: ActionPane(
                               motion: const ScrollMotion(),
                               children: [
-                                const SlidableAction(
-                                  onPressed: null,
+                                SlidableAction(
+                                  onPressed: (BuildContext context) async {
+                                    await Navigator.of(context)
+                                        .push(
+                                          MaterialPageRoute(
+                                            builder: (context) => EditBookPage(
+                                              book: book,
+                                            ),
+                                          ),
+                                        )
+                                        .then((_) => model.fetchBooks());
+                                  },
                                   icon: Icons.edit,
                                   label: '編集',
                                 ),
