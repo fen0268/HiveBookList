@@ -20,4 +20,10 @@ class BookListModel extends ChangeNotifier {
     book.delete();
     notifyListeners();
   }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+    notifyListeners();
+  }
 }
