@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:hive_book_list_sample/utils/hive_box_name_constants.dart';
-import 'package:uuid/uuid.dart';
 
 import '../domain/book.dart';
 
@@ -27,7 +26,7 @@ class BooksRepository {
   Future<void> add({required String title, required String author}) async {
     try {
       final box = await _booksBox.box;
-      await box.add(Book(id: const Uuid().v4(), title: title, author: author));
+      await box.add(Book(title: title, author: author));
     } catch (e) {
       throw Exception();
     }
