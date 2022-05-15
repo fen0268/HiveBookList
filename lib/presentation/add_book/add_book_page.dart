@@ -15,7 +15,7 @@ class AddBookPage extends StatelessWidget {
     return ChangeNotifierProvider<AddBookModel>(
       create: (_) => AddBookModel(bookRepository),
       child: Consumer<AddBookModel>(
-        builder: (_, model, __) {
+        builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(
@@ -57,15 +57,26 @@ class AddBookPage extends StatelessWidget {
                         return null;
                       },
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: GestureDetector(
+                        child: model.image == null
+                            ? const Text('画像を選択してください')
+                            : Image.file(model.image!),
+                        onTap: () async {
+                          await model.getImageFromGallery();
+                        },
+                      ),
+                    ),
                     ElevatedButton(
                       onPressed: model.isOnPressed
                           ? () {
-                              model.add();
+                              model.add(image: model.image!);
                               Navigator.of(context).pop();
                             }
                           : null,
                       child: const Text('追加'),
-                    )
+                    ),
                   ],
                 ),
               ),

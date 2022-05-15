@@ -19,6 +19,7 @@ class BookAdapter extends TypeAdapter<Book> {
     return Book(
       title: fields[0] as String,
       author: fields[1] as String,
+      image: fields[2] as File,
     );
   }
 
@@ -29,7 +30,9 @@ class BookAdapter extends TypeAdapter<Book> {
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.author);
+      ..write(obj.author)
+      ..writeByte(2)
+      ..write(obj.image);
   }
 
   @override
