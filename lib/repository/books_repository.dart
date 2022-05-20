@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:hive/hive.dart';
 
 import '../domain/book.dart';
@@ -28,14 +26,12 @@ class BooksRepository {
   Future<void> add({
     required String title,
     required String author,
-    required File image,
   }) async {
     try {
       final box = await _booksBox.box;
       await box.add(Book(
         title: title,
         author: author,
-        image: image,
       ));
     } catch (e) {
       throw Exception();

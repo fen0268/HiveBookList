@@ -57,7 +57,6 @@ class BookListPage extends StatelessWidget {
                           ),
                         ]),
                         child: ListTile(
-                          leading: Image.file(book.image),
                           title: Text(book.title),
                           subtitle: Text(book.author),
                         ),

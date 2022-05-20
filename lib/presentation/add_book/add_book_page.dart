@@ -57,21 +57,10 @@ class AddBookPage extends StatelessWidget {
                         return null;
                       },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: GestureDetector(
-                        child: model.image == null
-                            ? const Text('画像を選択してください')
-                            : Image.file(model.image!),
-                        onTap: () async {
-                          await model.getImageFromGallery();
-                        },
-                      ),
-                    ),
                     ElevatedButton(
                       onPressed: model.isOnPressed
                           ? () {
-                              model.add(image: model.image!);
+                              model.add();
                               Navigator.of(context).pop();
                             }
                           : null,

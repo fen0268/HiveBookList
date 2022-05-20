@@ -13,7 +13,7 @@ class EditBookModel extends ChangeNotifier {
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController authorController = TextEditingController();
-  bool isOnPressed = false;
+  bool isOnPressed = true;
 
   void changeIsOnPressed() {
     isOnPressed = titleController.text.isNotEmpty;
