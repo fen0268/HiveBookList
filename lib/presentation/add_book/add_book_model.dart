@@ -20,14 +20,15 @@ class AddBookModel extends ChangeNotifier {
     );
     notifyListeners();
   }
-  //
-  // Future<void> getImageFromGallery() async {
-  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile == null) {
-  //     return;
-  //   }
-  //   notifyListeners();
-  // }
+
+  Future<void> getImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile == null) {
+      return;
+    }
+    final uInt = await pickedFile.readAsBytes();
+    notifyListeners();
+  }
 
   void changeIsOnPressed() {
     isOnPressed = titleController.text.isNotEmpty;

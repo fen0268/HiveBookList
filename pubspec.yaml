@@ -15,6 +15,7 @@ dependencies:
   uuid: ^3.0.6
   flutter_slidable: ^1.2.0
   image_picker: ^0.8.5+3
+  pedantic_mono: ^1.19.2
 
 dev_dependencies:
   flutter_test:

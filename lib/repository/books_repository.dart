@@ -29,10 +29,12 @@ class BooksRepository {
   }) async {
     try {
       final box = await _booksBox.box;
-      await box.add(Book(
-        title: title,
-        author: author,
-      ));
+      await box.add(
+        Book(
+          title: title,
+          author: author,
+        ),
+      );
     } catch (e) {
       throw Exception();
     }

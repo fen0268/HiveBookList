@@ -58,6 +58,12 @@ class AddBookPage extends StatelessWidget {
                       },
                     ),
                     ElevatedButton(
+                      onPressed: () async {
+                        model.getImageFromGallery();
+                      },
+                      child: const Text('aaa'),
+                    ),
+                    ElevatedButton(
                       onPressed: model.isOnPressed
                           ? () {
                               model.add();
