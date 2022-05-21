@@ -22,7 +22,9 @@ class BookListPage extends StatelessWidget {
       child: Consumer<BookListModel>(
         builder: (context, model, _) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: const Text('本一覧'),
+            ),
             body: Stack(
               children: [
                 Scrollbar(
@@ -59,7 +61,10 @@ class BookListPage extends StatelessWidget {
                           ],
                         ),
                         child: ListTile(
-                          leading: Image.memory(book.uInt!),
+                          leading: AspectRatio(
+                            aspectRatio: 3 / 2,
+                            child: Image.memory(book.uInt!),
+                          ),
                           title: Text(book.title),
                           subtitle: Text(book.author),
                         ),

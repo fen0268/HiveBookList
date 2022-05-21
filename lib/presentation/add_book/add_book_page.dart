@@ -19,12 +19,38 @@ class AddBookPage extends StatelessWidget {
       child: Consumer<AddBookModel>(
         builder: (context, model, _) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: const Text('本を追加'),
+            ),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
+                    GestureDetector(
+                      child: SizedBox(
+                        width: 100,
+                        height: 160,
+                        child: model.uInt == null
+                            ? Stack(
+                                children: [
+                                  Container(
+                                    color: Colors.grey,
+                                  ),
+                                  Column(
+                                    children: const [
+                                      Text('画像を選択'),
+                                      Text('してください')
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Image.memory(model.uInt!),
+                      ),
+                      onTap: () async {
+                        await model.getImageFromGallery();
+                      },
+                    ),
                     TextFormField(
                       decoration: const InputDecoration(
                         labelText: 'タイトル',
@@ -58,17 +84,6 @@ class AddBookPage extends StatelessWidget {
 
                         return null;
                       },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        child: model.uInt == null
-                            ? const Text('画像を')
-                            : Image.memory(model.uInt!),
-                        onTap: () async {
-                          await model.getImageFromGallery();
-                        },
-                      ),
                     ),
                     ElevatedButton(
                       onPressed: model.isOnPressed

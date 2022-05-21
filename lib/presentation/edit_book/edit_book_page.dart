@@ -15,12 +15,37 @@ class EditBookPage extends StatelessWidget {
       child: Consumer<EditBookModel>(
         builder: (_, model, __) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: const Text('本を編集'),
+            ),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
+                    GestureDetector(
+                      child: SizedBox(
+                        width: 100,
+                        height: 160,
+                        child: model.uInt == null
+                            ? Stack(
+                                children: [
+                                  Container(
+                                    color: Colors.grey,
+                                  ),
+                                  Column(
+                                    children: const [
+                                      Text('画像を選択を\nしてください'),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Image.memory(model.uInt!),
+                      ),
+                      onTap: () async {
+                        await model.getImageFromGallery();
+                      },
+                    ),
                     TextFormField(
                       decoration: const InputDecoration(
                         labelText: 'タイトル',
