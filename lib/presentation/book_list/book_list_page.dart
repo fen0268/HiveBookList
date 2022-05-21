@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hive_book_list_sample/presentation/book_list/book_list_model.dart';
-import 'package:hive_book_list_sample/presentation/edit_book/edit_book_page.dart';
-import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/book.dart';
+import '../../repository/books_repository.dart';
 import '../add_book/add_book_page.dart';
+import '../edit_book/edit_book_page.dart';
+import 'book_list_model.dart';
 
 class BookListPage extends StatelessWidget {
   const BookListPage({Key? key}) : super(key: key);
@@ -31,32 +31,35 @@ class BookListPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final book = model.books[index];
                       return Slidable(
-                        endActionPane:
-                            ActionPane(motion: const ScrollMotion(), children: [
-                          SlidableAction(
-                            onPressed: (BuildContext context) async {
-                              await Navigator.of(context)
-                                  .push(
-                                    MaterialPageRoute(
-                                      builder: (context) => EditBookPage(
-                                        book: book,
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (BuildContext context) async {
+                                await Navigator.of(context)
+                                    .push(
+                                      MaterialPageRoute(
+                                        builder: (context) => EditBookPage(
+                                          book: book,
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .then((_) => model.fetchBooks());
-                            },
-                            icon: Icons.edit,
-                            label: '編集',
-                          ),
-                          SlidableAction(
-                            onPressed: (BuildContext context) {
-                              showConfirmDialog(context, book, model);
-                            },
-                            icon: Icons.delete,
-                            label: '削除',
-                          ),
-                        ]),
+                                    )
+                                    .then((_) => model.fetchBooks());
+                              },
+                              icon: Icons.edit,
+                              label: '編集',
+                            ),
+                            SlidableAction(
+                              onPressed: (BuildContext context) {
+                                showConfirmDialog(context, book, model);
+                              },
+                              icon: Icons.delete,
+                              label: '削除',
+                            ),
+                          ],
+                        ),
                         child: ListTile(
+                          leading: Image.memory(book.uInt!),
                           title: Text(book.title),
                           subtitle: Text(book.author),
                         ),
@@ -90,7 +93,10 @@ class BookListPage extends StatelessWidget {
   }
 
   Future showConfirmDialog(
-      BuildContext context, Book book, BookListModel model) {
+    BuildContext context,
+    Book book,
+    BookListModel model,
+  ) {
     return showDialog(
       context: context,
       barrierDismissible: false,

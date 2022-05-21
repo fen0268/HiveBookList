@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive/hive.dart';
 
 import '../domain/book.dart';
@@ -26,6 +28,7 @@ class BooksRepository {
   Future<void> add({
     required String title,
     required String author,
+    required Uint8List? uInt,
   }) async {
     try {
       final box = await _booksBox.box;
@@ -33,6 +36,7 @@ class BooksRepository {
         Book(
           title: title,
           author: author,
+          uInt: uInt,
         ),
       );
     } catch (e) {

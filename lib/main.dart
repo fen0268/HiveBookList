@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive_book_list_sample/domain/book.dart';
-import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
+import 'domain/book.dart';
 import 'presentation/book_list/book_list_page.dart';
+import 'repository/books_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

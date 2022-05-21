@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive_flutter/adapters.dart';
 
 part 'book.g.dart';
@@ -7,6 +9,7 @@ class Book extends HiveObject {
   Book({
     required this.title,
     required this.author,
+    required this.uInt,
   });
 
   @HiveField(0)
@@ -14,4 +17,7 @@ class Book extends HiveObject {
 
   @HiveField(1)
   String author;
+
+  @HiveField(2)
+  Uint8List? uInt;
 }
