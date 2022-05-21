@@ -28,25 +28,25 @@ class AddBookPage extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      child: SizedBox(
-                        width: 100,
-                        height: 160,
-                        child: model.uInt == null
-                            ? Stack(
-                                children: [
-                                  Container(
-                                    color: Colors.grey,
-                                  ),
-                                  Column(
-                                    children: const [
-                                      Text('画像を選択'),
-                                      Text('してください')
-                                    ],
-                                  ),
-                                ],
-                              )
-                            : Image.memory(model.uInt!),
-                      ),
+                      child: model.uInt == null
+                          ? Stack(
+                              children: [
+                                Container(
+                                  color: Colors.grey,
+                                  width: 120,
+                                  height: 150,
+                                ),
+                                const Text('画像を選択を\nしてください'),
+                              ],
+                            )
+                          : SizedBox(
+                              width: 120,
+                              height: 150,
+                              child: Image.memory(
+                                model.uInt!,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                       onTap: () async {
                         await model.getImageFromGallery();
                       },

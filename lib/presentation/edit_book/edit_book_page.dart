@@ -25,22 +25,12 @@ class EditBookPage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       child: SizedBox(
-                        width: 100,
-                        height: 160,
-                        child: model.uInt == null
-                            ? Stack(
-                                children: [
-                                  Container(
-                                    color: Colors.grey,
-                                  ),
-                                  Column(
-                                    children: const [
-                                      Text('画像を選択を\nしてください'),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            : Image.memory(model.uInt!),
+                        width: 120,
+                        height: 150,
+                        child: Image.memory(
+                          model.uInt!,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       onTap: () async {
                         await model.getImageFromGallery();

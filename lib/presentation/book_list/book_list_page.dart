@@ -50,6 +50,7 @@ class BookListPage extends StatelessWidget {
                               },
                               icon: Icons.edit,
                               label: '編集',
+                              backgroundColor: Colors.black54,
                             ),
                             SlidableAction(
                               onPressed: (BuildContext context) {
@@ -57,13 +58,18 @@ class BookListPage extends StatelessWidget {
                               },
                               icon: Icons.delete,
                               label: '削除',
+                              backgroundColor: Colors.red,
                             ),
                           ],
                         ),
                         child: ListTile(
-                          leading: AspectRatio(
-                            aspectRatio: 3 / 2,
-                            child: Image.memory(book.uInt!),
+                          leading: SizedBox(
+                            width: 40,
+                            height: 55,
+                            child: Image.memory(
+                              book.uInt!,
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                           title: Text(book.title),
                           subtitle: Text(book.author),

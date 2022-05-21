@@ -34,6 +34,8 @@
     <string>This app requires to add file to your camera</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>マイクにアクセスするよ</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Why is my app authenticating using face id?</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
