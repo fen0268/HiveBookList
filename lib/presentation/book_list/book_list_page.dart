@@ -27,56 +27,54 @@ class BookListPage extends StatelessWidget {
             ),
             body: Stack(
               children: [
-                Scrollbar(
-                  child: ListView.builder(
-                    itemCount: model.books.length,
-                    itemBuilder: (context, index) {
-                      final book = model.books[index];
-                      return Slidable(
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (BuildContext context) async {
-                                await Navigator.of(context)
-                                    .push(
-                                      MaterialPageRoute(
-                                        builder: (context) => EditBookPage(
-                                          book: book,
-                                        ),
+                ListView.builder(
+                  itemCount: model.books.length,
+                  itemBuilder: (context, index) {
+                    final book = model.books[index];
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (BuildContext context) async {
+                              await Navigator.of(context)
+                                  .push(
+                                    MaterialPageRoute(
+                                      builder: (context) => EditBookPage(
+                                        book: book,
                                       ),
-                                    )
-                                    .then((_) => model.fetchBooks());
-                              },
-                              icon: Icons.edit,
-                              label: '編集',
-                              backgroundColor: Colors.black54,
-                            ),
-                            SlidableAction(
-                              onPressed: (BuildContext context) {
-                                showConfirmDialog(context, book, model);
-                              },
-                              icon: Icons.delete,
-                              label: '削除',
-                              backgroundColor: Colors.red,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          leading: SizedBox(
-                            width: 40,
-                            height: 55,
-                            child: Image.memory(
-                              book.uInt!,
-                              fit: BoxFit.fitHeight,
-                            ),
+                                    ),
+                                  )
+                                  .then((_) => model.fetchBooks());
+                            },
+                            icon: Icons.edit,
+                            label: '編集',
+                            backgroundColor: Colors.black54,
                           ),
-                          title: Text(book.title),
-                          subtitle: Text(book.author),
+                          SlidableAction(
+                            onPressed: (BuildContext context) {
+                              showConfirmDialog(context, book, model);
+                            },
+                            icon: Icons.delete,
+                            label: '削除',
+                            backgroundColor: Colors.red,
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        leading: SizedBox(
+                          width: 40,
+                          height: 55,
+                          child: Image.memory(
+                            book.uInt!,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
-                      );
-                    },
-                  ),
+                        title: Text(book.title),
+                        subtitle: Text(book.author),
+                      ),
+                    );
+                  },
                 ),
                 Positioned(
                   bottom: 50,
