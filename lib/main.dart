@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<BooksRepository>(create: (_) => BooksRepository(BooksBox()))
+        Provider<BooksRepository>(
+          create: (_) => BooksRepository(
+            BooksBox(),
+          ),
+        )
       ],
       child: const MaterialApp(
         home: BookListPage(),
