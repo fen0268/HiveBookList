@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive_book_list_sample/repository/books_repository.dart';
 
 import '../../domain/book.dart';
+import '../../repository/books_repository.dart';
 
 class BookListModel extends ChangeNotifier {
   BookListModel(BooksRepository booksRepository) {
@@ -10,7 +10,6 @@ class BookListModel extends ChangeNotifier {
   late BooksRepository _booksRepository;
   List<Book> books = [];
 
-  ///全取得
   Future<void> fetchBooks() async {
     books = await _booksRepository.fetchAll();
     notifyListeners();

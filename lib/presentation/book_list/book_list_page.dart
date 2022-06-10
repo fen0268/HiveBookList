@@ -9,7 +9,7 @@ import '../edit_book/edit_book_page.dart';
 import 'book_list_model.dart';
 
 class BookListPage extends StatelessWidget {
-  const BookListPage({Key? key}) : super(key: key);
+  const BookListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

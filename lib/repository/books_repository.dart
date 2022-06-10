@@ -17,12 +17,8 @@ class BooksRepository {
   late BooksBox _booksBox;
 
   Future<List<Book>> fetchAll() async {
-    try {
-      final box = await _booksBox.box;
-      return box.isEmpty ? [] : box.values.toList();
-    } catch (e) {
-      throw Exception();
-    }
+    final box = await _booksBox.box;
+    return box.isEmpty ? [] : box.values.toList();
   }
 
   Future<void> add({
@@ -30,17 +26,9 @@ class BooksRepository {
     required String author,
     required Uint8List? uInt,
   }) async {
-    try {
-      final box = await _booksBox.box;
-      await box.add(
-        Book(
-          title: title,
-          author: author,
-          uInt: uInt,
-        ),
-      );
-    } catch (e) {
-      throw Exception();
-    }
+    final box = await _booksBox.box;
+    await box.add(
+      Book(title: title, author: author, uInt: uInt),
+    );
   }
 }

@@ -17,7 +17,7 @@ dependencies:
   image_picker: ^0.8.5+3
   pedantic_mono: ^1.19.2
   local_auth: ^2.1.0
-  
+  flutter_riverpod: ^1.0.4
 
 dev_dependencies:
   flutter_test:

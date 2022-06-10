@@ -5,7 +5,7 @@ import '../../domain/book.dart';
 import 'edit_book_model.dart';
 
 class EditBookPage extends StatelessWidget {
-  const EditBookPage({Key? key, required this.book}) : super(key: key);
+  const EditBookPage({super.key, required this.book});
   final Book book;
 
   @override

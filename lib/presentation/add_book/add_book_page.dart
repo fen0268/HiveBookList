@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive_book_list_sample/presentation/add_book/add_book_model.dart';
-import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:provider/provider.dart';
 
+import '../../repository/books_repository.dart';
+import 'add_book_model.dart';
+
 class AddBookPage extends StatelessWidget {
-  const AddBookPage({Key? key}) : super(key: key);
+  const AddBookPage({super.key});
 
   @override
   Widget build(BuildContext context) {
