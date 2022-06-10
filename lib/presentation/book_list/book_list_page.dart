@@ -101,7 +101,7 @@ class BookListPage extends StatelessWidget {
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: const Text('本の削除'),
+          title: const Text('削除の確認'),
           content: Text('｢${book.title}」を削除しますか？'),
           actions: [
             TextButton(
@@ -112,7 +112,12 @@ class BookListPage extends StatelessWidget {
               onPressed: () {
                 model.delete(book);
                 model.fetchBookList();
+                final snackBar = SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('${book.title}を削除しました'),
+                );
                 Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
               child: const Text('はい'),
             ),
