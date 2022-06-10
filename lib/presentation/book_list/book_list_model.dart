@@ -10,12 +10,12 @@ class BookListModel extends ChangeNotifier {
   late BooksRepository _booksRepository;
   List<Book> books = [];
 
-  Future<void> fetchBooks() async {
+  void fetchBookList() async {
     books = await _booksRepository.fetchAll();
     notifyListeners();
   }
 
-  Future<void> delete({required Book book}) async {
+  Future<void> delete(Book book) async {
     book.delete();
     notifyListeners();
   }

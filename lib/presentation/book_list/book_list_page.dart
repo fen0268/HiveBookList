@@ -18,7 +18,7 @@ class BookListPage extends StatelessWidget {
       listen: false,
     );
     return ChangeNotifierProvider(
-      create: (_) => BookListModel(booksRepository)..fetchBooks(),
+      create: (_) => BookListModel(booksRepository)..fetchBookList(),
       child: Consumer<BookListModel>(
         builder: (context, model, child) {
           return Scaffold(
@@ -44,7 +44,7 @@ class BookListPage extends StatelessWidget {
                                     ),
                                   ),
                                 )
-                                .then((_) => model.fetchBooks());
+                                .then((_) => model.fetchBookList());
                           },
                           icon: Icons.edit,
                           label: '編集',
@@ -81,7 +81,7 @@ class BookListPage extends StatelessWidget {
                         fullscreenDialog: true,
                       ),
                     )
-                    .then((_) => model.fetchBooks());
+                    .then((_) => model.fetchBookList());
               },
               child: const Icon(Icons.add),
             ),
@@ -110,8 +110,8 @@ class BookListPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                model.delete(book: book);
-                model.fetchBooks();
+                model.delete(book);
+                model.fetchBookList();
                 Navigator.pop(context);
               },
               child: const Text('はい'),
