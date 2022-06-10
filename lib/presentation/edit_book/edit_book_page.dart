@@ -11,7 +11,7 @@ class EditBookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<EditBookModel>(
-      create: (_) => EditBookModel(book: book),
+      create: (_) => EditBookModel(book),
       child: Consumer<EditBookModel>(
         builder: (_, model, __) {
           return Scaffold(
@@ -73,7 +73,7 @@ class EditBookPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: model.isOnPressed
                           ? () {
-                              model.update(book: book);
+                              model.update(book);
 
                               Navigator.of(context).pop();
                             }

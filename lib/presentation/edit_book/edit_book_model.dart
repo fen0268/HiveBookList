@@ -10,7 +10,7 @@ class EditBookModel extends ChangeNotifier {
   String? title;
   String? author;
   Uint8List? uInt;
-  EditBookModel({required this.book}) {
+  EditBookModel(this.book) {
     titleController.text = book.title;
     authorController.text = book.author;
     uInt = book.uInt;
@@ -27,7 +27,7 @@ class EditBookModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> update({required Book book}) async {
+  Future<void> update(Book book) async {
     book.title = titleController.text;
     book.author = authorController.text;
     book.uInt = uInt;
