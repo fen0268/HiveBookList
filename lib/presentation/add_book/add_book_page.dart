@@ -50,6 +50,7 @@ class AddBookPage extends StatelessWidget {
                             ),
                       onTap: () async {
                         await model.getImageFromGallery();
+                        model.changeIsOnPressed();
                       },
                     ),
                     TextFormField(

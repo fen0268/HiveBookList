@@ -39,9 +39,9 @@ class AddBookModel extends ChangeNotifier {
 
   ///ここ訂正
   void changeIsOnPressed() {
-    isOnPressed =
-        titleController.text.isNotEmpty && authorController.text.isNotEmpty;
-    uInt == null;
+    isOnPressed = titleController.text.isNotEmpty &&
+        authorController.text.isNotEmpty &&
+        uInt != null;
     notifyListeners();
   }
 }
