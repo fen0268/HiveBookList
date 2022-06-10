@@ -13,7 +13,7 @@ class EditBookPage extends StatelessWidget {
     return ChangeNotifierProvider<EditBookModel>(
       create: (_) => EditBookModel(book),
       child: Consumer<EditBookModel>(
-        builder: (_, model, __) {
+        builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
               title: const Text('本を編集'),
@@ -33,6 +33,7 @@ class EditBookPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () async {
+                        model.changeIsOnPressed();
                         await model.getImageFromGallery();
                       },
                     ),
@@ -49,7 +50,6 @@ class EditBookPage extends StatelessWidget {
                         if (value == null || value.isEmpty) {
                           return 'タイトルを入力してください。';
                         }
-
                         return null;
                       },
                     ),
@@ -66,7 +66,6 @@ class EditBookPage extends StatelessWidget {
                         if (value == null || value.isEmpty) {
                           return '著者を入力してください。';
                         }
-
                         return null;
                       },
                     ),
@@ -74,11 +73,16 @@ class EditBookPage extends StatelessWidget {
                       onPressed: model.isOnPressed
                           ? () {
                               model.update(book);
-
+                              const snackBar = SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text('本を編集しました'),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                               Navigator.of(context).pop();
                             }
                           : null,
-                      child: const Text('更新'),
+                      child: const Text('更新する'),
                     ),
                   ],
                 ),

@@ -19,7 +19,7 @@ class AddBookModel extends ChangeNotifier {
   final TextEditingController authorController = TextEditingController();
   bool isOnPressed = false;
 
-  Future<void> add() async {
+  Future<void> addBook() async {
     await _booksRepository.add(
       title: titleController.text,
       author: authorController.text,
