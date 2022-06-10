@@ -14,13 +14,17 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<BooksRepository>(create: (_) => BooksRepository(BooksBox()))
+        Provider<BooksRepository>(
+          create: (_) => BooksRepository(
+            BooksBox(),
+          ),
+        ),
       ],
       child: const MaterialApp(
         home: BookListPage(),

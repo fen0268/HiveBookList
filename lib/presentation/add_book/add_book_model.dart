@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:hive_book_list_sample/repository/books_repository.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../repository/books_repository.dart';
 
 class AddBookModel extends ChangeNotifier {
   AddBookModel(
@@ -36,9 +37,10 @@ class AddBookModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  ///ここ訂正
   void changeIsOnPressed() {
-    isOnPressed = titleController.text.isNotEmpty;
-    isOnPressed = authorController.text.isNotEmpty;
+    isOnPressed =
+        titleController.text.isNotEmpty && authorController.text.isNotEmpty;
     uInt == null;
     notifyListeners();
   }

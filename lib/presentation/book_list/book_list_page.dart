@@ -9,7 +9,7 @@ import '../edit_book/edit_book_page.dart';
 import 'book_list_model.dart';
 
 class BookListPage extends StatelessWidget {
-  const BookListPage({Key? key}) : super(key: key);
+  const BookListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,80 +20,70 @@ class BookListPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => BookListModel(booksRepository)..fetchBooks(),
       child: Consumer<BookListModel>(
-        builder: (context, model, _) {
+        builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
               title: const Text('本一覧'),
             ),
-            body: Stack(
-              children: [
-                ListView.builder(
-                  itemCount: model.books.length,
-                  itemBuilder: (context, index) {
-                    final book = model.books[index];
-                    return Slidable(
-                      endActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            onPressed: (BuildContext context) async {
-                              await Navigator.of(context)
-                                  .push(
-                                    MaterialPageRoute(
-                                      builder: (context) => EditBookPage(
-                                        book: book,
-                                      ),
+            body: Center(
+              child: ListView.builder(
+                itemCount: model.books.length,
+                itemBuilder: (context, index) {
+                  final book = model.books[index];
+                  return Slidable(
+                    endActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: (BuildContext context) async {
+                            await Navigator.of(context)
+                                .push(
+                                  MaterialPageRoute(
+                                    builder: (context) => EditBookPage(
+                                      book: book,
                                     ),
-                                  )
-                                  .then((_) => model.fetchBooks());
-                            },
-                            icon: Icons.edit,
-                            label: '編集',
-                            backgroundColor: Colors.black54,
-                          ),
-                          SlidableAction(
-                            onPressed: (BuildContext context) {
-                              showConfirmDialog(context, book, model);
-                            },
-                            icon: Icons.delete,
-                            label: '削除',
-                            backgroundColor: Colors.red,
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        leading: SizedBox(
-                          width: 40,
-                          height: 55,
-                          child: Image.memory(
-                            book.uInt!,
-                            fit: BoxFit.fitHeight,
-                          ),
+                                  ),
+                                )
+                                .then((_) => model.fetchBooks());
+                          },
+                          icon: Icons.edit,
+                          label: '編集',
+                          backgroundColor: Colors.black54,
                         ),
-                        title: Text(book.title),
-                        subtitle: Text(book.author),
+                        SlidableAction(
+                          onPressed: (BuildContext context) {
+                            showConfirmDialog(context, book, model);
+                          },
+                          icon: Icons.delete,
+                          label: '削除',
+                          backgroundColor: Colors.red,
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
+                      leading: Image.memory(
+                        book.uInt!,
+                        fit: BoxFit.fitHeight,
                       ),
-                    );
-                  },
-                ),
-                Positioned(
-                  bottom: 50,
-                  right: 20,
-                  child: FloatingActionButton(
-                    onPressed: () async {
-                      await Navigator.of(context)
-                          .push(
-                            MaterialPageRoute(
-                              builder: (context) => const AddBookPage(),
-                              fullscreenDialog: true,
-                            ),
-                          )
-                          .then((_) => model.fetchBooks());
-                    },
-                    child: const Icon(Icons.add),
-                  ),
-                ),
-              ],
+                      title: Text(book.title),
+                      subtitle: Text(book.author),
+                    ),
+                  );
+                },
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                await Navigator.of(context)
+                    .push(
+                      MaterialPageRoute(
+                        builder: (context) => const AddBookPage(),
+                        fullscreenDialog: true,
+                      ),
+                    )
+                    .then((_) => model.fetchBooks());
+              },
+              child: const Icon(Icons.add),
             ),
           );
         },
