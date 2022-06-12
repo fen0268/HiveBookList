@@ -1,9 +1,13 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../domain/book.dart';
+
+final editBookProvider =
+    ChangeNotifierProvider.family((ref, Book book) => EditBookModel(book));
 
 class EditBookModel extends ChangeNotifier {
   final Book book;
